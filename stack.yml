@@ -1,0 +1,23 @@
+provider:
+  name: faas
+  gateway: https://md-gw.team-serverless.xyz
+
+functions:
+  github-push:
+    lang: go
+    handler: ./github-push
+    image: martindekov/github-push:0.5.0-rc1
+    labels:
+      openfaas-cloud: "1"
+    environment:
+      # Http_X_Github_Event: push
+      validate_hmac: true
+      read_timeout: 10s
+      write_timeout: 10s
+      write_debug: true
+      read_debug: true
+      validate_customers: true
+      customers_url: "https://raw.githubusercontent.com/openfaas/openfaas-cloud/master/CUSTOMERS"
+    environment_file:
+      - gateway_config.yml
+      - github.yml
