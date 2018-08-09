@@ -61,7 +61,7 @@ func Handle(req []byte) string {
 		}
 
 		for _, customer := range customers {
-			if customer == pushEvent.Repository.Owner.Login {
+			if strings.EqualFold(customer, pushEvent.Repository.Owner.Login) {
 				found = true
 			}
 		}
