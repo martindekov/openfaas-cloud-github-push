@@ -61,7 +61,7 @@ func Handle(req []byte) string {
 		}
 
 		for _, customer := range customers {
-			if strings.EqualFold(customer, pushEvent.Repository.Owner.Login) {
+			if strings.ToLower(customer) == strings.ToLower(pushEvent.Repository.Owner.Login) {
 				found = true
 			}
 		}
